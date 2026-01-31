@@ -1,6 +1,6 @@
 Package: craneOT
 Title: Optimal-Transport Tools for Weekly Roost Flows, Hubs and Corridors
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: 
     c(
       person(given = "Zsolt", family = "Végvári", email = "zsolt.vegvari@gmail.com",
