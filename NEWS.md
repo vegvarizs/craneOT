@@ -1,3 +1,4 @@
-# craneOT (development version)
+# craneOT 0.1.0
 
-* Initial CRAN submission.
+* Initial public release: sparse unbalanced OT flows, hub/corridor metrics, scenario reruns.
+
