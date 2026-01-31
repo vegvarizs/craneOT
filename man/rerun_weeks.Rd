@@ -2,10 +2,52 @@
 % Please edit documentation in R/scenario.R
 \name{rerun_weeks}
 \alias{rerun_weeks}
-\title{Rerun selected weeks under modified kernel}
+\title{Rerun selected weeks under a modified kernel}
 \usage{
-rerun_weeks(A, weeks_idx, K_mod, eps, rho)
+rerun_weeks(
+  A,
+  weeks_idx,
+  K_mod,
+  eps,
+  rho,
+  sinkhorn_fun = sinkhorn_uot,
+  maxiter = 1000,
+  tol = 1e-06
+)
+}
+\arguments{
+\item{A}{Numeric matrix of dimension \eqn{T \times n}; rows are weeks,
+columns are roosts (observed counts).}
+
+\item{weeks_idx}{Integer vector of week indices \eqn{t} for which both
+\eqn{t} and \eqn{t+1} exist.}
+
+\item{K_mod}{\code{dgCMatrix} sparse kernel of size \eqn{n \times n}.}
+
+\item{eps}{Positive numeric; entropic regularisation parameter \eqn{\varepsilon}.}
+
+\item{rho}{Positive numeric; marginal relaxation penalty \eqn{\rho}.}
+
+\item{sinkhorn_fun}{Function with signature
+\code{function(a_t, b_t, K, eps, rho, ...)}; defaults to \code{\link{sinkhorn_uot}}.}
+
+\item{maxiter}{Integer; maximum number of iterations.}
+
+\item{tol}{Numeric; convergence tolerance.}
+}
+\value{
+A list of \eqn{n \times n} (usually sparse) flow matrices \eqn{F_t},
+one for each requested transition.
 }
 \description{
-Rerun selected weeks under modified kernel
+Recomputes unbalanced-OT flows for chosen \eqn{t \to t+1} transitions
+using a modified sparse kernel.
+}
+\details{
+For each \eqn{t \in \mathrm{weeks\_idx}}, the function computes
+\eqn{a_t = A[t,\,]} and \eqn{b_t = A[t+1,\,]}, then calls
+\code{sinkhorn_fun(a_t, b_t, K_mod, eps, rho, maxiter = maxiter, tol = tol)}.
+}
+\examples{
+# out <- rerun_weeks(A, weeks_idx = c(10, 11), K_mod, eps = 60, rho = 30)
 }

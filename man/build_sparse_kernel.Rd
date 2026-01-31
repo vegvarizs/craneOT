@@ -2,20 +2,22 @@
 % Please edit documentation in R/kernel.R
 \name{build_sparse_kernel}
 \alias{build_sparse_kernel}
-\title{Build sparse kNN kernel (exponential)}
+\title{Build sparse kNN kernel (exponential)
+Build sparse k-NN Gibbs kernel}
 \usage{
 build_sparse_kernel(coords, k = 60, eps = 50)
 }
 \arguments{
-\item{coords}{matrix/data.frame with columns lon,lat (WGS84 or planar)}
+\item{coords}{numeric matrix or data frame (eg. \code{lon}, \code{lat} columns)}
 
-\item{k}{integer, neighbors}
+\item{k}{integer; number of neighbours}
 
-\item{eps}{numeric, distance scale (same units as coords distances)}
+\item{eps}{numeric; distance scale}
 }
 \value{
-list(K=dgCMatrix, D=matrix)
+lista: \code{K} (dgCMatrix, \eqn{n \times n}) és \code{D} (distance matrix)
 }
 \description{
 Build sparse kNN kernel (exponential)
+Build sparse k-NN Gibbs kernel
 }

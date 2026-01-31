@@ -2,17 +2,42 @@
 % Please edit documentation in R/flows_metrics.R
 \name{flows_summary}
 \alias{flows_summary}
-\title{Aggregate flows and compute hub scores & mean distance}
+\title{Flow-derived edge and hub metrics
+Summaries from a list of weekly flow matrices}
 \usage{
 flows_summary(flows, Dmat = NULL, A = NULL)
 }
 \arguments{
-\item{flows}{list of n x n (dgCMatrix) weekly flows}
+\item{flows}{List of weekly \eqn{n \times n} numeric or sparse
+(\code{dgCMatrix}) flow matrices \eqn{F_t}.}
 
-\item{Dmat}{optional n x n distances for mean distance}
+\item{Dmat}{Optional \eqn{n \times n} distance matrix \eqn{d_{ij}}.
+If supplied, the mean transport distance is
+\eqn{\sum_{ij} P_{\mathrm{sum},ij} d_{ij} / \sum_{ij} P_{\mathrm{sum},ij}}.}
 
-\item{A}{optional n x T counts to scale hub score}
+\item{A}{Optional \eqn{T \times n} count matrix. If supplied, the
+\code{hub_score} is scaled by \code{sum(A)}; otherwise by
+\code{sum(inflow + outflow)}.}
+}
+\value{
+A list with:
+\describe{
+\item{Psum}{\eqn{n \times n} sparse matrix; cumulative flow \eqn{\sum_t F_t}.}
+\item{inflow}{Numeric length-\eqn{n}; \eqn{\sum_j P_{\mathrm{sum},ji}}.}
+\item{outflow}{Numeric length-\eqn{n}; \eqn{\sum_j P_{\mathrm{sum},ij}}.}
+\item{hub_score}{Numeric length-\eqn{n};
+\eqn{(inflow+outflow)/\max(1,\mathrm{scale\_tot})}.}
+\item{mean_distance}{Scalar or \code{NA};
+\eqn{\sum_{ij} P_{\mathrm{sum},ij} d_{ij} / \sum_{ij} P_{\mathrm{sum},ij}}
+if \code{Dmat} is supplied.}
+}
 }
 \description{
-Aggregate flows and compute hub scores & mean distance
+Computes cumulative flows (\eqn{P_{\mathrm{sum}}=\sum_t F_t}),
+in-/outflows, a hub score, and—optionally—the global mean transport
+distance if a distance matrix is provided.
+}
+\examples{
+# res <- flows_summary(flows)
+# str(res$Psum)
 }

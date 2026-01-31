@@ -2,10 +2,32 @@
 % Please edit documentation in R/flows_metrics.R
 \name{external_flux}
 \alias{external_flux}
-\title{External flux for one transition}
+\title{External import/export for one transition}
 \usage{
 external_flux(Ft, a_t, b_t)
 }
+\arguments{
+\item{Ft}{\eqn{n \times n} numeric or sparse (\code{dgCMatrix}) flow matrix
+for the \eqn{t \to t+1} transition.}
+
+\item{a_t}{Numeric length-\eqn{n}; observed totals at week \eqn{t}.}
+
+\item{b_t}{Numeric length-\eqn{n}; observed totals at week \eqn{t+1}.}
+}
+\value{
+A list with two scalars:
+\describe{
+\item{ext_out}{\eqn{\sum_i \max\{0,\, a_{i,t} - (F_t \mathbf 1)_i\}}.}
+\item{ext_in }{\eqn{\sum_j \max\{0,\, b_{j,t} - (F_t^\top \mathbf 1)_j\}}.}
+}
+}
 \description{
-External flux for one transition
+Computes network-external exports and imports for a single
+\eqn{t \to t+1} transition from a reconstructed flow matrix and
+observed margins.
+}
+\examples{
+# Ft <- Matrix::Matrix(0, 3, 3, sparse = TRUE)
+# a_t <- c(10, 5, 0); b_t <- c(6, 6, 3)
+# external_flux(Ft, a_t, b_t)
 }

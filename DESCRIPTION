@@ -1,22 +1,38 @@
 Package: craneOT
-Title: craneOT: Count-based Optimal Transport for Roost Networks
-Version: 0.0.0.9000
+Title: Optimal-Transport Tools for Weekly Roost Flows, Hubs and Corridors
+Version: 0.1.0
 Authors@R: 
-    person("Zsolt", "Végvári", , "zsolt.vegvari@gmail.com", role = c("aut", "cre"))
-Description: Sparse unbalanced OT pipeline to reconstruct weekly flows,
-    hubs and corridors from synchronized roost counts.
+    c(
+      person(given = "Zsolt", family = "Végvári", email = "zsolt.vegvari@gmail.com",
+             role = c("aut","cre"), comment = c(ORCID = "0000-0002-2804-9282"))
+    )
+Description: Sparse unbalanced optimal transport reconstruction for weekly
+    roost counts, with hub/corridor metrics and scenario analysis.
 License: MIT + file LICENSE
+URL: https://github.com/vegvarizs/craneOT
+BugReports: https://github.com/vegvarizs/craneOT/issues
 Encoding: UTF-8
-Language: en
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
-Imports: 
+Depends: R (>= 4.3)
+Imports:
+    Matrix,
+    methods,
+    stats
+Suggests:
     dplyr,
-    Matrix
-Suggests: 
+    tidyr,
+    ggplot2,
     ggrepel,
+    RANN,
+    MARSS,
+    strucchange,
+    sf,
+    terra,
+    ecmwfr,
+    qpdf,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
-Config/testthat/edition: 3
 VignetteBuilder: knitr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3

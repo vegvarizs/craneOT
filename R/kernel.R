@@ -1,9 +1,11 @@
 # R/kernel.R
 #' Build sparse kNN kernel (exponential)
-#' @param coords matrix/data.frame with columns lon,lat (WGS84 or planar)
-#' @param k integer, neighbors
-#' @param eps numeric, distance scale (same units as coords distances)
-#' @return list(K=dgCMatrix, D=matrix)
+#' Build sparse k-NN Gibbs kernel
+#' @param coords numeric matrix or data frame (eg. \code{lon}, \code{lat} columns)
+#' @param k      integer; number of neighbours
+#' @param eps    numeric; distance scale
+#'
+#' @return lista: \code{K} (dgCMatrix, \eqn{n \times n}) és \code{D} (distance matrix)
 #' @export
 build_sparse_kernel <- function(coords, k = 60, eps = 50) {
   stopifnot(ncol(coords) >= 2)
